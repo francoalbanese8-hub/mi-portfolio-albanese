@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franco Albanese | Portfolio - 7° Programación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg-elevated: #0f172a;
+      --bg-card: #111827;
+      --bg-card-hover: #172033;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --accent-secondary: #818cf8;
+      --border: #1e293b;
+      --shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.65);
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --accent-secondary: #4f46e5;
+      --border: #cbd5e1;
+      --shadow: 0 12px 30px -8px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at 15% 10%, var(--accent-glow), transparent 35%),
+                        radial-gradient(circle at 85% 40%, rgba(129, 140, 248, 0.08), transparent 40%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(7, 11, 20, 0.85);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    [data-theme="light"] header { background-color: rgba(255, 255, 255, 0.88); }
+
+    .nav-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .theme-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.3rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    section { margin-bottom: 5.5rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 3rem;
+      align-items: center;
+      padding-top: 1.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 1.1rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #ffffff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .avatar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .avatar-glow {
+      width: 136px;
+      height: 136px;
+      margin: 0 auto 1.1rem;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    }
+
+    .avatar-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .avatar-card h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+
+    .avatar-role {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-family: 'JetBrains Mono', monospace;
+      display: block;
+      margin-bottom: 1.3rem;
+    }
+
+    .avatar-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .avatar-stats strong { display: block; font-size: 0.92rem; color: var(--accent); }
+    .avatar-stats span { font-size: 0.8rem; color: var(--text-muted); }
+
+    .section-title { font-size: 1.9rem; font-weight: 800; margin-bottom: 0.4rem; letter-spacing: -0.5px; }
+    .section-subtitle { color: var(--text-muted); margin-bottom: 2.2rem; font-size: 1.02rem; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+    }
+
+    .card-icon { font-size: 1.8rem; margin-bottom: 0.9rem; display: inline-block; }
+    .card h3 { font-size: 1.18rem; margin-bottom: 0.6rem; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .tech-section { margin-top: 2.8rem; }
+    .tech-section h3 { font-size: 1.1rem; margin-bottom: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+    .tech-list { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .tech-pill:hover { border-color: var(--accent); color: var(--accent); }
+
+    .featured-project {
+      background: var(--bg-card);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px -15px var(--accent-glow);
+      display: grid;
+      grid-template-columns: 0.95fr 1.25fr;
+      margin-bottom: 2.5rem;
+    }
+
+    .featured-visual {
+      background: linear-gradient(145deg, #0b132b, #1c2541);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      color: #f8fafc;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.25); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .bus-mockup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      width: 100%;
+      margin: 1.5rem 0;
+    }
+
+    .route-badge {
+      padding: 0.75rem 0.6rem;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .line-500 { border-left: 4px solid #facc15; }
+    .line-501 { border-left: 4px solid #ef4444; }
+    .line-503 { border-left: 4px solid #3b82f6; }
+    .line-505 { border-left: 4px solid #a16207; }
+
+    .architecture-flow {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 0.9rem;
+      width: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+
+    .architecture-flow span {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .mockup-caption { font-size: 0.82rem; color: #94a3b8; }
+
+    .featured-content {
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      display: block;
+    }
+
+    .featured-content h3 { font-size: 1.55rem; font-weight: 800; margin-bottom: 0.9rem; line-height: 1.25; }
+    .featured-desc { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 1.2rem; }
+
+    .featured-highlights { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.4rem; }
+
+    .highlight-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .highlight-item strong { color: var(--text); }
+
+    .featured-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .featured-stack span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      background: var(--accent-glow);
+      color: var(--accent);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+
+    .app-screenshot {
+      margin: 2rem auto 2.5rem;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .app-screenshot h3 {
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+    }
+
+    .app-screenshot img {
+      display: block;
+      width: min(100%, 360px);
+      max-height: 680px;
+      object-fit: contain;
+      margin: 0 auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .app-screenshot p {
+      margin-top: 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+    .project-img-placeholder {
+      height: 155px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.12));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-body h3 { font-size: 1.18rem; margin-bottom: 0.6rem; }
+    .project-body p { color: var(--text-muted); font-size: 0.92rem; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links { display: flex; justify-content: center; gap: 1.8rem; margin-bottom: 1rem; }
+    .footer-links a { color: var(--text); text-decoration: none; font-weight: 600; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 860px) {
+      .featured-project { grid-template-columns: 1fr; }
+      .featured-visual { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-buttons { justify-content: center; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-card);
+        padding: 1.2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.active { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#inicio" class="logo">&lt;FrancoAlbanese /&gt;</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#sobre-mi">Sobre Mí</a></li>
+        <li><a href="#perfil">Fortalezas</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><button class="theme-btn" id="themeToggle">☀️ Modo Claro</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-content">
+        <span class="badge">7° Año • Tecnicatura en Programación</span>
+        <h1>Hola, soy <span>Franco Albanese</span>.</h1>
+        <p>
+          Desarrollador Web en formación con perfil analítico y comercial. No solo escribo código: analizo problemas reales de la ciudad, propongo ideas de proyectos con alto impacto y sé cómo presentar y vender cada solución para que funcione tanto técnica como institucionalmente.
+        </p>
+        <div class="hero-buttons">
+          <a href="#proyectos" class="btn-primary">Ver InfoMicro & Proyectos</a>
+          <a href="#contacto" class="btn-secondary">Contactarme</a>
+        </div>
+      </div>
+
+      <div class="avatar-card">
+        <div class="avatar-glow">
+          <div class="avatar-circle">FA</div>
+        </div>
+        <h3>Franco Albanese</h3>
+        <span class="avatar-role">7° Programación • Tandil, Bs. As.</span>
+        <div class="avatar-stats">
+          <div>
+            <strong>Full-Stack</strong>
+            <span>Web & Datos</span>
+          </div>
+          <div>
+            <strong>Producto</strong>
+            <span>Análisis & Venta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi">
+      <h2 class="section-title">Sobre Mí & Perfil Diferencial</h2>
+      <p class="section-subtitle">Lo que aporto a un equipo de desarrollo más allá de tirar líneas de código.</p>
+
+      <div id="perfil" class="skills-grid">
+        <div class="card">
+          <span class="card-icon">📊</span>
+          <h3>Análisis de Problemas</h3>
+          <p>Antes de programar, analizo el contexto urbano y las necesidades de los usuarios para diseñar soluciones escalables y sin fallos técnicos.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">💡</span>
+          <h3>Ideación de Proyectos</h3>
+          <p>Facilidad para detectar oportunidades cotidianas en Tandil y transformarlas en ideas de software con potencial de llegada real al municipio.</p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🤝</span>
+          <h3>Comunicación y Venta</h3>
+          <p>Capacidad para defender proyectos, explicar propuestas técnicas con claridad y vender el valor institucional de cada desarrollo tecnológico.</p>
+        </div>
+      </div>
+
+      <div class="tech-section">
+        <h3>Stack Tecnológico</h3>
+        <div class="tech-list">
+          <span class="tech-pill">HTML5</span>
+          <span class="tech-pill">CSS3 / Grid & Flex</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">Supabase (Realtime DB)</span>
+          <span class="tech-pill">PHP & MySQL</span>
+          <span class="tech-pill">APIs & Geolocalización</span>
+          <span class="tech-pill">Git & GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <h2 class="section-title">Proyectos Destacados</h2>
+      <p class="section-subtitle">Soluciones reales pensadas desde la experiencia del usuario y la viabilidad pública.</p>
+
+      <article class="featured-project">
+        <div class="featured-visual">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span> RASTREO EN TIEMPO REAL • TANDIL
+          </div>
+          <div class="bus-mockup">
+            <div class="route-badge line-500">Línea 500 • Amarilla</div>
+            <div class="route-badge line-501">Línea 501 • Roja</div>
+            <div class="route-badge line-503">Línea 503 • Azul</div>
+            <div class="route-badge line-505">Línea 505 • Marrón</div>
+          </div>
+          <div class="architecture-flow">
+            🚌 Celular en Colectivo ➔ <span>Supabase DB</span> ➔ 📱 Celular del Usuario
+          </div>
+          <p class="mockup-caption">Sincronización instantánea de coordenadas GPS sin hardware costoso</p>
+        </div>
+
+        <div class="featured-content">
+          <div class="featured-header">
+            <span class="project-tag">★ PROYECTO FINAL 7° AÑO • ALTO IMPACTO URBANO</span>
+            <h3>InfoMicro — Red de Colectivos de Tandil en Tiempo Real</h3>
+          </div>
+          
+          <p class="featured-desc">
+            Plataforma web inteligente diseñada para transformar la movilidad urbana en <strong>Tandil</strong>. Utiliza <strong>Supabase</strong> como gestor principal de base de datos en tiempo real: cada unidad de colectivo cuenta con un teléfono móvil a bordo que transmite continuamente su ubicación GPS hacia Supabase, permitiendo que el teléfono de cualquier usuario se conecte al instante para ver dónde viene su colectivo, sus recorridos y paradas.
+          </p>
+
+          <div class="featured-highlights">
+            <div class="highlight-item">
+              <strong>⚙️ Arquitectura Simple y Eficiente:</strong> Al usar celulares como transmisores GPS conectados a <strong>Supabase Realtime</strong>, se elimina la necesidad de instalar equipos satelitales caros, logrando actualizaciones fluidas directo en la pantalla del pasajero.
+            </div>
+            <div class="highlight-item">
+              <strong>🏛️ Potencial Municipal:</strong> Diseñado con una arquitectura escalable, bajo costo de implementación y visión comercial clara para integrarse directamente con el <strong>Municipio de Tandil</strong> y las empresas locales como herramienta oficial de movilidad ciudadana.
+            </div>
+          </div>
+
+          <div class="featured-stack">
+            <span>HTML5 / CSS3</span>
+            <span>JavaScript</span>
+            <span>Supabase (PostgreSQL & Realtime)</span>
+            <span>Geolocalización GPS</span>
+          </div>
+        </div>
+      </article>
+
+
+
+      <figure class="app-screenshot">
+        <h3>Vista de personalización de InfoMicro</h3>
+        <img src="infomicro-personalizacion.jpeg" alt="Pantalla de personalización de InfoMicro con tema oscuro y colores violeta y celeste">
+        <p>Configuración del tema y los colores de la aplicación.</p>
+      </figure>
+
+      <figure class="app-screenshot">
+        <h3>Perfil de usuario de InfoMicro</h3>
+        <img src="infomicro-perfil.jpeg" alt="Pantalla del perfil de usuario de InfoMicro con líneas favoritas y opciones de configuración">
+        <p>Perfil del usuario, líneas favoritas y accesos a las opciones de la aplicación.</p>
+      </figure>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-img-placeholder">
+            [ Catálogo Web / Base de Datos ]
+          </div>
+          <div class="project-body">
+            <div>
+              <span class="project-tag">Desarrollo Full-Stack</span>
+              <h3>Catálogo Web con Gestión CRUD</h3>
+              <p>Aplicación web dinámica con sistema de autenticación, contraseñas encriptadas y panel de administración conectado a base de datos MySQL.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img-placeholder">
+            [ Próximo Desarrollo ]
+          </div>
+          <div class="project-body">
+            <div>
+              <span class="project-tag">Sistema / App</span>
+              <h3>Sistema de Gestión Comercial</h3>
+              <p>Espacio reservado para sumar otro desarrollo o prototipo enfocado en automatización de procesos y análisis comercial.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="footer-links">
+      <a href="https://github.com/" target="_blank">GitHub</a>
+      <a href="mailto:tuemail@ejemplo.com">Email</a>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
+    <p>© 2026 Franco Albanese — 7° Año Tecnicatura en Programación • Tandil.</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        htmlElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙 Modo Oscuro';
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️ Modo Claro';
+      }
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
